@@ -1,8 +1,14 @@
 # Terraform
-.terraform/
+**/.terraform/*
 *.tfstate
 *.tfstate.*
 .terraform.lock.hcl
 
 # Environment files
 .env
+
+# Terraform plans
+*.tfplan
+
+# Crash logs
+crash.log
