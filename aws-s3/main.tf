@@ -4,6 +4,10 @@ terraform {
         source  = "hashicorp/aws"
         version = "~> 6.0"
       }
+    random = {
+        source = "hashicorp/random"
+        version = "~> 3.0"
+    }
     }
 }
 
@@ -11,8 +15,12 @@ provider "aws" {
     region = "us-east-1"
 }
 
+resource "random_id" "rand_id"{
+    byte_length = 8
+}
+
 resource "aws_s3_bucket" "demo-bucket" {
-    bucket = "demo-bucket-abcdg1234"
+    bucket = "demo-bucket-${random_id.rand_id.hex}"
 
 }
 
