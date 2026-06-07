@@ -54,3 +54,13 @@ resource "aws_route_table_association" "public_subnet_association" {
     route_table_id = aws_route_table.my_route_table.id
     subnet_id = aws_subnet.public_subnet.id
 }
+
+resource "aws_instance" "myserver" {
+    ami = "ami-00e801948462f718a"
+    instance_type = "t2.small"
+    subnet_id = aws_subnet.public_subnet.id 
+    
+    tags = {
+        Name = "Sample Server"
+    }
+}
