@@ -20,8 +20,29 @@ output "aws_ami" {
     value = data.aws_ami.name.id
 }
 
+data "aws_security_group" "name" {
+    tags = {
+        mywebserver = "http"
+    }
+}
+
+data "aws_security_group" "id" {
+    id = data.aws_security_group.name.id
+}
+
+data "aws_vpc" "name" {
+    tags = {
+        ENV = "PROD"
+        Name = "my-vpc"
+    }
+}
+
+output "vpc_id" {
+    value = data.aws_vpc.name.id
+}
+
 resource "aws_instance" "myserver" {
-    ami = "ami-0e3fa6b36f33f1eee"
+    ami = data.aws_ami.name.id
     instance_type = "t2.small"
 
     tags = {
