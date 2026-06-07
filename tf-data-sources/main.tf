@@ -41,6 +41,33 @@ output "vpc_id" {
     value = data.aws_vpc.name.id
 }
 
+#AZ 
+data "aws_availability_zones" "names" {
+    state = "available"
+}
+
+output "aws_zones" {
+    value = data.aws_availability_zones.names
+}
+
+### to get the account details
+data "aws_caller_identity" "name" {
+
+}
+
+output "caller_info" {
+    value = data.aws_caller_identity.name
+}
+
+##to find region details
+data "aws_region" "name" {
+
+}
+
+output "region_name" {
+  value = data.aws_region.name.name
+}
+
 resource "aws_instance" "myserver" {
     ami = data.aws_ami.name.id
     instance_type = "t2.small"
