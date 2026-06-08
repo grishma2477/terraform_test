@@ -11,12 +11,17 @@ provider "aws" {
   region = "us-east-1"
 }
 
+locals {
+  owner = "ABC"
+  name = "MyServer"
+}
+
 resource "aws_instance" "name" {
   ami           = "ami-00e801948462f718a"
   instance_type = var.aws_ec2_instance_type
 
   tags = merge(var.additional_tags, {
-    Name = "SampleServer"
+    Name = local.name
   })
 
   root_block_device {
