@@ -13,11 +13,11 @@ provider "aws" {
 
 resource "aws_instance" "name" {
   ami           = "ami-00e801948462f718a"
-  instance_type = "t2.small"
+  instance_type = var.aws_ec2_instance_type
 
-  tags = {
-    Name = "Sample Server"
-  } 
+  tags = merge(var.additional_tags, {
+    Name = "SampleServer"
+  })
 
   root_block_device {
     delete_on_termination = true
